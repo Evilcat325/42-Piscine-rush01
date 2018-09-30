@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 20:17:14 by seli              #+#    #+#             */
-/*   Updated: 2018/09/29 22:01:21 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/29 23:42:33 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@
 # define TRUE 1
 # define FALSE 0
 # define SHOW(X) matrix[row][col][X] == 0 ? X + '0' : ' '
-# define ROW(X) (row / 3) * 3 + X / 3
-# define COL(X) (col / 3) * 3 + X % 3
+# define ROW(X, Y) ((Y / 3) * 3 + X / 3)
+# define COL(X, Y) ((Y / 3) * 3 + X % 3)
+# define BOXR(X, Y) ((X / 3) * 3 + Y / 3)
+# define BOXC(X, Y) ((X % 3) * 3 + Y % 3)
 
 void	ft_updated_board(int board[9][9], int matrix[9][9][10]);
 void	ft_update(int board[9][9], int matrix[9][9][10], int row, int col);
 int		ft_search_unique_cell(int board[9][9], int matrx[9][9][10]);
+int		ft_search_unique_in_box(int board[9][9], int matrix[9][9][10]);
 void	ft_imperative_sudoku(int board[9][9], int matrix[9][9][10]);
 
 #endif
