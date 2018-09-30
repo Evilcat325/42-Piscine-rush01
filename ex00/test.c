@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 20:19:00 by seli              #+#    #+#             */
-/*   Updated: 2018/09/29 21:24:33 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/29 22:05:59 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,19 @@ void	ft_print_matrix(int matrix[9][9][10])
 		printf("------------------------------------------------------------\n");
 		row++;
 	}
+
+  row = 0;
+	while (row < 9)
+	{
+		col = 0;
+		while (col < 9)
+		{
+			printf("%c ", matrix[row][col][0] > 8 ? '9' : matrix[row][col][0] + '0');
+			col++;
+		}
+		printf("\n");
+		row++;
+	}
 }
 
 int main(void) {
@@ -85,6 +98,6 @@ int main(void) {
   ft_imperative_sudoku(board, matrix);
   ft_print_soduku(board);
   printf("------------------\n");
-  ft_print_matrix(matrix);
+  //ft_print_matrix(matrix);
   return 0;
 }
