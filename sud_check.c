@@ -55,11 +55,12 @@ int is_box(int board[9][9], int y, int x, int guess)
   return (TRUE);
 }
 
-int is_valid(int board[9][9], int y, int x, int guess)
+int is_valid_and_viable(int board[9][9], int y, int x, int guess, int list[10])
 {
     if(is_row(board, y, x, guess) &&
        is_column(board, y, x, guess) &&
-       is_box(board, y, x, guess))
+       is_box(board, y, x, guess) &&
+       list[guess] == 0)
       return (TRUE);
     return (FALSE);
 }
