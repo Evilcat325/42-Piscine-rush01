@@ -3,77 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   sudoku_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lisimpki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 16:24:46 by lisimpki          #+#    #+#             */
-/*   Updated: 2018/09/30 16:50:27 by lisimpki         ###   ########.fr       */
+/*   Updated: 2018/09/30 20:19:33 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define TRUE 1
-#define FALSE 0
+#include "ft_imperative_sudoku.h"
 
-int		is_row(int board[9][9], int y, int x, int guess)
+int		is_row_valid(int board[9][9], int row, int col, int guess)
 {
 	int i;
 
-	i = 0;
-	if (board[y][x])
-		return (FALSE);
-	while (i < 9)
-	{
-		if (board[y][i] == guess)
+	i = -1;
+	while (++i < 9)
+		if (board[row][i] == guess)
 			return (FALSE);
-		i++;
-	}
 	return (TRUE);
 }
 
-int		is_column(int board[9][9], int y, int x, int guess)
+int		is_column_valid(int board[9][9], int row, int col, int guess)
 {
 	int i;
 
-	i = 0;
-	if (board[y][x])
-		return (FALSE);
-	while (i < 9)
-	{
-		if (board[i][x] == guess)
+	i = -1;
+	while (++i < 9)
+		if (board[i][col] == guess)
 			return (FALSE);
-		i++;
-	}
 	return (TRUE);
 }
 
-int		is_box(int board[9][9], int y, int x, int guess)
+int		is_box_valid(int board[9][9], int row, int col, int guess)
 {
-	int num[2];
+	int i;
 
-	num[0] = 0;
-	if (board[y][x])
-		return (FALSE);
-	y -= y % 3;
-	x -= x % 3;
-	while (num[0] < 3)
-	{
-		num[1] = 0;
-		while (num[1] < 3)
-		{
-			if (board[num[0] + y][num[1] + x] == guess)
-				return (FALSE);
-			num[1]++;
-		}
-		num[0]++;
-	}
+	i = -1;
+	while (++i < 9)
+		if (board[ROW(i, row)][COL(i, col)] == guess)
+			return (FALSE);
 	return (TRUE);
 }
 
-int		valid_and_viable(int b[9][9], int y, int x, int guess, int list[10])
+int		is_guess_valid(int b[9][9], int row, int col, int guess)
 {
-	if( //(list[guess] == 0 &&
-	is_row(b, y, x, guess) &&
-	is_column(b, y, x, guess) &&
-	is_box(b, y, x, guess))
+	if (is_row_valid(b, row, col, guess)
+		&& is_column_valid(b, row, col, guess)
+		&& is_box_valid(b, row, col, guess))
 		return (TRUE);
 	return (FALSE);
 }

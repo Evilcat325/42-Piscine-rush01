@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 20:17:14 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 19:48:00 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 20:20:06 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@ void	ft_row(int b[9][9], int m[9][9][10], int number, int *updated);
 void	ft_col(int b[9][9], int m[9][9][10], int number, int *updated);
 void	ft_box(int b[9][9], int m[9][9][10], int number, int *updated);
 void	ft_imperative_sudoku(int board[9][9], int matrix[9][9][10]);
+int		is_row_valid(int board[9][9], int row, int col, int guess);
+int		is_column_valid(int board[9][9], int row, int col, int guess);
+int		is_box_valid(int board[9][9], int row, int col, int guess);
+int		is_guess_valid(int b[9][9], int row, int col, int guess);
 
 #endif
