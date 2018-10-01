@@ -48,8 +48,6 @@ int backtrack_please(int board[9][9], int solved_board[9][9]) //, int matrix[9][
   int y;
   int guess;
 
-    printf("\n Function name = backtrack_please\n");
-
   if (is_solved(board, &y, &x))
   {
     copy_table(board, solved_board);
@@ -64,7 +62,6 @@ int backtrack_please(int board[9][9], int solved_board[9][9]) //, int matrix[9][
 
     if (valid_and_viable(board, y, x, guess)) //, matrix[y][x])
     {
-          printf("\n guess = %d\n", guess);
       board[y][x] = guess;
 
       if (backtrack_please(board, solved_board)) //, matrix))
