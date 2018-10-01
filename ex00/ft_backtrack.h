@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_imperative_sudoku.h                             :+:      :+:    :+:   */
+/*   ft_backtrack.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/29 20:17:14 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 22:24:21 by seli             ###   ########.fr       */
+/*   Created: 2018/09/30 22:09:08 by seli              #+#    #+#             */
+/*   Updated: 2018/09/30 22:25:24 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_IMPERATIVE_SUDOKU_H
-# define FT_IMPERATIVE_SUDOKU_H
+#ifndef FT_BACKTRACK_H
+# define FT_BACKTRACK_H
 # include "ft_define.h"
-# include "ft_search_function.h"
+# include "ft_valid_sudoku.h"
 
-void	ft_updated_board(int board[9][9], int matrix[9][9][10]);
-void	ft_update(int board[9][9], int matrix[9][9][10], int row, int col);
-void	ft_imperative_sudoku(int board[9][9], int matrix[9][9][10]);
+int		next_empty_cell(int board[9][9]);
+void	copy_board(int src[9][9], int dst[9][9]);
+int		ft_backtrack(int b[9][9], int s[9][9], int m[9][9][10], int *solution);
 
 #endif

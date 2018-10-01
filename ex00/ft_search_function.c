@@ -6,11 +6,11 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 19:47:39 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 19:47:58 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 22:23:46 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_imperative_sudoku.h"
+#include "ft_search_function.h"
 
 void	ft_row(int b[9][9], int m[9][9][10], int number, int *updated)
 {

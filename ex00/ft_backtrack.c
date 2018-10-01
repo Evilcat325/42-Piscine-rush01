@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   backtrack.c                                        :+:      :+:    :+:   */
+/*   ft_backtrack.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 20:21:44 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 21:14:14 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 22:21:45 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_imperative_sudoku.h"
+#include "ft_backtrack.h"
 
 int		next_empty_cell(int board[9][9])
 {
@@ -26,7 +26,7 @@ int		next_empty_cell(int board[9][9])
 	return (SOLVED);
 }
 
-void	copy_table(int src[9][9], int dst[9][9])
+void	copy_board(int src[9][9], int dst[9][9])
 {
 	int i;
 	int j;
@@ -44,7 +44,7 @@ void	copy_table(int src[9][9], int dst[9][9])
 	}
 }
 
-int		backtrack(int b[9][9], int s[9][9], int m[9][9][10], int *solution)
+int		ft_backtrack(int b[9][9], int s[9][9], int m[9][9][10], int *solution)
 {
 	int i;
 	int guess;
@@ -52,7 +52,7 @@ int		backtrack(int b[9][9], int s[9][9], int m[9][9][10], int *solution)
 	i = next_empty_cell(b);
 	if (i == SOLVED)
 	{
-		copy_table(b, s);
+		copy_board(b, s);
 		if ((*solution)++ == 1)
 			return (STOP);
 		return (NEXT);
@@ -65,7 +65,7 @@ int		backtrack(int b[9][9], int s[9][9], int m[9][9][10], int *solution)
 		if (is_guess_valid(b, i / 9, i % 9, guess))
 		{
 			b[i / 9][i % 9] = guess;
-			if (backtrack(b, s, m, solution) == STOP)
+			if (ft_backtrack(b, s, m, solution) == STOP)
 				return (STOP);
 			b[i / 9][i % 9] = 0;
 		}

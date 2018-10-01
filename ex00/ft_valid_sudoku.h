@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_imperative_sudoku.h                             :+:      :+:    :+:   */
+/*   ft_valid_sudoku.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/29 20:17:14 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 22:24:21 by seli             ###   ########.fr       */
+/*   Created: 2018/09/30 22:01:41 by seli              #+#    #+#             */
+/*   Updated: 2018/09/30 22:05:07 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_IMPERATIVE_SUDOKU_H
-# define FT_IMPERATIVE_SUDOKU_H
+#ifndef FT_VALID_SUDOKU_H
+# define FT_VALID_SUDOKU_H
 # include "ft_define.h"
-# include "ft_search_function.h"
 
-void	ft_updated_board(int board[9][9], int matrix[9][9][10]);
-void	ft_update(int board[9][9], int matrix[9][9][10], int row, int col);
-void	ft_imperative_sudoku(int board[9][9], int matrix[9][9][10]);
+int		is_row_valid(int board[9][9], int row, int guess);
+int		is_column_valid(int board[9][9], int col, int guess);
+int		is_box_valid(int board[9][9], int row, int col, int guess);
+int		is_guess_valid(int b[9][9], int row, int col, int guess);
 
 #endif
