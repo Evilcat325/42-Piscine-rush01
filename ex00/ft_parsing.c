@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 20:03:46 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 22:27:45 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 22:29:21 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int		is_invalid_input(int ac, char **av)
 		col = 0;
 		while (col < 9)
 		{
-			if (av[row][col] != '.'
-				&& !('1' <= av[row][col] && av[row][col] <= '9'))
+			if (!(av[row][col] == '.'
+				|| ('1' <= av[row][col] && av[row][col] <= '9')))
 				return (TRUE);
 			col++;
 		}

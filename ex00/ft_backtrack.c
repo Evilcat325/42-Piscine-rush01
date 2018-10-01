@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 20:21:44 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 22:21:45 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 22:41:46 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ int		ft_backtrack(int b[9][9], int s[9][9], int m[9][9][10], int *solution)
 	i = next_empty_cell(b);
 	if (i == SOLVED)
 	{
+		*solution += 1;
 		copy_board(b, s);
-		if ((*solution)++ == 1)
-			return (STOP);
-		return (NEXT);
+		return ((*solution == 2) ? (STOP) : (NEXT));
 	}
 	guess = 0;
 	while (++guess <= 9)

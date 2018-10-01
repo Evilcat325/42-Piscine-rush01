@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 20:41:02 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 22:25:56 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 22:47:39 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	ft_initialize(int b[9][9], int s[9][9], int m[9][9][10])
 	int col;
 	int number;
 
-	row = -1;
-	while (++row < 9)
+	row = 0;
+	while (row < 9)
 	{
-		col = -1;
-		while (++row < 0)
+		col = 0;
+		while (col < 9)
 		{
 			b[row][col] = 0;
 			s[row][col] = 0;
@@ -55,6 +55,8 @@ void	ft_initialize(int b[9][9], int s[9][9], int m[9][9][10])
 			{
 				m[row][col][number] = 0;
 			}
+			col++;
 		}
+		row++;
 	}
 }
