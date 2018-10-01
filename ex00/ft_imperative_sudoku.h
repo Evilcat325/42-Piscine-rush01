@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 20:17:14 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 20:20:06 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 20:32:59 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # define NOT_POSSIBLE 1
 # define TRUE 1
 # define FALSE 0
+# define SOLVED -1
+# define STOP 1
+# define NEXT 0
 # define SHOW(X) matrix[row][col][X] == 0 ? X + '0' : ' '
 # define ROW(X, Y) ((Y / 3) * 3 + X / 3)
 # define COL(X, Y) ((Y / 3) * 3 + X % 3)

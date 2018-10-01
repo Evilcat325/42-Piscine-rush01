@@ -1,75 +1,76 @@
-#define TRUE 1
-#define FALSE 0
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   backtrack.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/30 20:21:44 by seli              #+#    #+#             */
+/*   Updated: 2018/09/30 20:38:33 by seli             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int g_solutions;
-int valid_and_viable(int board[9][9], int y, int x, int guess); //, int list[10]);
-void    show_table(int board[9][9]);
+#include "ft_imperative_sudoku.h"
 
-int is_solved(int board[9][9], int *y, int *x)
+int		g_solutions = 0;
+
+int		next_empty_cell(int board[9][9])
 {
-  *y = 0;
-  while(*y < 9)
-  {
-    *x = 0;
-    while(*x < 9)
-    {
-      if (!(board[*y][*x]))
-        return (FALSE);
-      (*x)++;
-    }
-    (*y)++;
-  }
-  return (TRUE);
+	int	i;
+
+	i = 0;
+	while (i < 81)
+	{
+		if (board[i / 9][i % 9] == 0)
+			return (i);
+		i++;
+	}
+	return (SOLVED);
 }
 
-void copy_table(int src_board[9][9], int dest_board[9][9])
+void	copy_table(int src_board[9][9], int dest_board[9][9])
 {
-  int i;
-  int j;
+	int i;
+	int j;
 
-  i = 0;
-  while (i < 9)
-  {
-      j = 0;
-      while (j < 9)
-      {
-          dest_board[i][j] = src_board[i][j];
-          j++;
-      }
-      i++;
-  }
-  g_solutions++;
+	i = 0;
+	while (i < 9)
+	{
+		j = 0;
+		while (j < 9)
+		{
+			dest_board[i][j] = src_board[i][j];
+			j++;
+		}
+		i++;
+	}
 }
 
-
-int backtrack_please(int board[9][9], int solved_board[9][9]) //, int matrix[9][9][10])
+int		backtrack_please(int b[9][9], int s[9][9], int m[9][9][10])
 {
-  int x;
-  int y;
-  int guess;
+	int col;
+	int row;
+	int guess;
 
-  if (is_solved(board, &y, &x))
-  {
-    copy_table(board, solved_board);
-    if (g_solutions == 2)
-      return (TRUE);
-    return(FALSE);
-  }
-
-  guess = 1;
-  while(guess <= 9)
-  {
-
-    if (valid_and_viable(board, y, x, guess)) //, matrix[y][x])
-    {
-      board[y][x] = guess;
-
-      if (backtrack_please(board, solved_board)) //, matrix))
-        return (TRUE);
-      board[y][x] = 0;
-    }
-    guess++;
-  }
-
-  return (FALSE);
+	if (next_empty_cell(b) == SOLVED)
+	{
+		copy_table(b, s);
+		if (++g_solutions == 2)
+			return (STOP);
+		return (NEXT);
+	}
+	guess = 0;
+	while (++guess <= 9)
+	{
+		if (m[row][col][guess] == NOT_POSSIBLE)
+			continue;
+		if (is_guess_valid(b, row, col, guess))
+		{
+			b[row][col] = guess;
+			if (backtrack_please(b, s, m) == STOP)
+				return (STOP);
+			b[row][col] = 0;
+		}
+	}
+	return (NEXT);
 }
