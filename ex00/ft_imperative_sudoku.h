@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 20:17:14 by seli              #+#    #+#             */
-/*   Updated: 2018/09/29 23:42:33 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 17:07:48 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 
 void	ft_updated_board(int board[9][9], int matrix[9][9][10]);
 void	ft_update(int board[9][9], int matrix[9][9][10], int row, int col);
-int		ft_search_unique_cell(int board[9][9], int matrx[9][9][10]);
-int		ft_search_unique_in_box(int board[9][9], int matrix[9][9][10]);
+int		ft_unique_row(int board[9][9], int matrix[9][9][10]);
+int		ft_unique_col(int board[9][9], int matrix[9][9][10]);
+int		ft_unique_cell(int board[9][9], int matrx[9][9][10]);
+int		ft_unique_box(int board[9][9], int matrix[9][9][10]);
 void	ft_imperative_sudoku(int board[9][9], int matrix[9][9][10]);
 
 #endif
