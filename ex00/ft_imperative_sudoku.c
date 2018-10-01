@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 13:40:44 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 17:13:50 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 19:22:26 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,125 +15,113 @@
 void	ft_imperative_sudoku(int board[9][9], int matrix[9][9][10])
 {
 	int	updated;
+	int	number;
 
 	ft_updated_board(board, matrix);
 	updated = TRUE;
 	while (updated)
 	{
 		updated = FALSE;
-		updated = ft_unique_cell(board, matrix) ? TRUE : updated;
-		updated = ft_unique_box(board, matrix) ? TRUE : updated;
-		updated = ft_unique_row(board, matrix) ? TRUE : updated;
-		updated = ft_unique_col(board, matrix) ? TRUE : updated;
-	}
-}
-
-int		ft_unique_row(int board[9][9], int matrix[9][9][10])
-{
-	int number;
-	int	row;
-	int col;
-	int	count;
-
-	number = 0;
-	while (++number <= 9)
-	{
-		row = -1;
-		while (++row < 9)
+		ft_cell(board, matrix, &updated);
+		number = 1;
+		while (number <= 9)
 		{
-			col = -1;
-			count = 0;
-			while (++col < 9)
-				if (matrix[row][col][number] == POSSIBLE)
-					count++;
-			col = -1;
-			if (count != 1)
-				continue;
-			while (++col < 9)
-			{
-				if (matrix[row][col][number] == POSSIBLE)
-				{
-					board[row][col] = number;
-					ft_update(board, matrix, row, col);
-					return (TRUE);
-				}
-			}
+			ft_box(board, matrix, number, &updated);
+			ft_row(board, matrix, number, &updated);
+			ft_col(board, matrix, number, &updated);
+			number++;
 		}
 	}
-	return (FALSE);
 }
 
-int		ft_unique_col(int board[9][9], int matrix[9][9][10])
+void	ft_row(int b[9][9], int m[9][9][10], int number, int *updated)
 {
-	int number;
 	int	row;
 	int col;
 	int	count;
 
-	number = 0;
-	while (++number <= 9)
+	row = -1;
+	while (++row < 9)
 	{
 		col = -1;
+		count = 0;
+		while (++col < 9)
+			if (m[row][col][number] == POSSIBLE)
+				count++;
+		col = -1;
+		if (count != 1)
+			continue;
 		while (++col < 9)
 		{
-			row = -1;
-			count = 0;
-			while (++row < 9)
-				if (matrix[row][col][number] == POSSIBLE)
-					count++;
-			row = -1;
-			if (count != 1)
-				continue;
-			while (++row < 9)
+			if (m[row][col][number] == POSSIBLE)
 			{
-				if (matrix[row][col][number] == POSSIBLE)
-				{
-					board[row][col] = number;
-					ft_update(board, matrix, row, col);
-					return (TRUE);
-				}
+				b[row][col] = number;
+				ft_update(b, m, row, col);
+				*updated = TRUE;
 			}
 		}
 	}
-	return (FALSE);
 }
 
-int		ft_unique_box(int board[9][9], int matrix[9][9][10])
+void	ft_col(int b[9][9], int m[9][9][10], int number, int *updated)
 {
-	int number;
+	int	row;
+	int col;
+	int	count;
+
+	col = -1;
+	while (++col < 9)
+	{
+		row = -1;
+		count = 0;
+		while (++row < 9)
+			if (m[row][col][number] == POSSIBLE)
+				count++;
+		row = -1;
+		if (count != 1)
+			continue;
+		while (++row < 9)
+		{
+			if (m[row][col][number] == POSSIBLE)
+			{
+				b[row][col] = number;
+				ft_update(b, m, row, col);
+				*updated = TRUE;
+			}
+		}
+	}
+}
+
+void	ft_box(int b[9][9], int m[9][9][10], int number, int *updated)
+{
 	int	i;
 	int j;
 	int	count;
 
-	number = 0;
-	while (++number <= 9)
+	i = -1;
+	while (++i < 9)
 	{
-		i = -1;
-		while (++i < 9)
+		j = -1;
+		count = 0;
+		while (++j < 9)
+			if (m[BOXR(i, j)][BOXC(i, j)][number] == POSSIBLE)
+				count++;
+		j = -1;
+		if (count != 1)
+			continue;
+		while (++j < 9)
 		{
-			j = -1;
-			count = 0;
-			while (++j < 9)
-				if (matrix[BOXR(i, j)][BOXC(i, j)][number] == POSSIBLE)
-					count++;
-			j = -1;
-			if (count != 1)
-				continue;
-			while (++j < 9)
+			if (m[BOXR(i, j)][BOXC(i, j)][number] == POSSIBLE)
 			{
-				if (matrix[BOXR(i, j)][BOXC(i, j)][number] == POSSIBLE)
-				{
-					board[BOXR(i, j)][BOXC(i, j)] = number;
-					ft_update(board, matrix, BOXR(i, j), BOXC(i, j));
-					return (TRUE);
-				}
+				b[BOXR(i, j)][BOXC(i, j)] = number;
+				ft_update(b, m, BOXR(i, j), BOXC(i, j));
+				*updated = TRUE;
 			}
 		}
 	}
-	return (FALSE);
 }
 
-int		ft_unique_cell(int board[9][9], int matrix[9][9][10])
+void	ft_cell(int b[9][9], int m[9][9][10], int *updated)
 {
 	int i;
 	int number;
@@ -141,20 +129,19 @@ int		ft_unique_cell(int board[9][9], int matrix[9][9][10])
 	i = -1;
 	while (++i < 81)
 	{
-		if (board[i / 9][i % 9] != 0
-			|| matrix[i / 9][i % 9][0] + 1 != 9)
+		if (b[i / 9][i % 9] != 0
+			|| m[i / 9][i % 9][0] + 1 != 9)
 			continue;
 		number = 0;
 		while (++number <= 9)
 		{
-			if (matrix[i / 9][i % 9][number] != POSSIBLE)
+			if (m[i / 9][i % 9][number] != POSSIBLE)
 				continue;
-			board[i / 9][i % 9] = number;
-			ft_update(board, matrix, i / 9, i % 9);
-			return (TRUE);
+			b[i / 9][i % 9] = number;
+			ft_update(b, m, i / 9, i % 9);
+			*updated = TRUE;
 		}
 	}
-	return (FALSE);
 }
 
 void	ft_update(int board[9][9], int matrix[9][9][10], int row, int col)

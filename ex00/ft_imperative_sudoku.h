@@ -6,7 +6,7 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/29 20:17:14 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 17:07:48 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 19:22:38 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@
 
 void	ft_updated_board(int board[9][9], int matrix[9][9][10]);
 void	ft_update(int board[9][9], int matrix[9][9][10], int row, int col);
-int		ft_unique_row(int board[9][9], int matrix[9][9][10]);
-int		ft_unique_col(int board[9][9], int matrix[9][9][10]);
-int		ft_unique_cell(int board[9][9], int matrx[9][9][10]);
-int		ft_unique_box(int board[9][9], int matrix[9][9][10]);
+void	ft_cell(int b[9][9], int m[9][9][10], int *updated);
+void	ft_row(int b[9][9], int m[9][9][10], int number, int *updated);
+void	ft_col(int b[9][9], int m[9][9][10], int number, int *updated);
+void	ft_box(int b[9][9], int m[9][9][10], int number, int *updated);
 void	ft_imperative_sudoku(int board[9][9], int matrix[9][9][10]);
 
 #endif
