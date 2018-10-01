@@ -6,13 +6,11 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 20:21:44 by seli              #+#    #+#             */
-/*   Updated: 2018/09/30 20:38:33 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 21:14:14 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_imperative_sudoku.h"
-
-int		g_solutions = 0;
 
 int		next_empty_cell(int board[9][9])
 {
@@ -28,7 +26,7 @@ int		next_empty_cell(int board[9][9])
 	return (SOLVED);
 }
 
-void	copy_table(int src_board[9][9], int dest_board[9][9])
+void	copy_table(int src[9][9], int dst[9][9])
 {
 	int i;
 	int j;
@@ -39,37 +37,37 @@ void	copy_table(int src_board[9][9], int dest_board[9][9])
 		j = 0;
 		while (j < 9)
 		{
-			dest_board[i][j] = src_board[i][j];
+			dst[i][j] = src[i][j];
 			j++;
 		}
 		i++;
 	}
 }
 
-int		backtrack_please(int b[9][9], int s[9][9], int m[9][9][10])
+int		backtrack(int b[9][9], int s[9][9], int m[9][9][10], int *solution)
 {
-	int col;
-	int row;
+	int i;
 	int guess;
 
-	if (next_empty_cell(b) == SOLVED)
+	i = next_empty_cell(b);
+	if (i == SOLVED)
 	{
 		copy_table(b, s);
-		if (++g_solutions == 2)
+		if ((*solution)++ == 1)
 			return (STOP);
 		return (NEXT);
 	}
 	guess = 0;
 	while (++guess <= 9)
 	{
-		if (m[row][col][guess] == NOT_POSSIBLE)
+		if (m[i / 9][i % 9][guess] == NOT_POSSIBLE)
 			continue;
-		if (is_guess_valid(b, row, col, guess))
+		if (is_guess_valid(b, i / 9, i % 9, guess))
 		{
-			b[row][col] = guess;
-			if (backtrack_please(b, s, m) == STOP)
+			b[i / 9][i % 9] = guess;
+			if (backtrack(b, s, m, solution) == STOP)
 				return (STOP);
-			b[row][col] = 0;
+			b[i / 9][i % 9] = 0;
 		}
 	}
 	return (NEXT);

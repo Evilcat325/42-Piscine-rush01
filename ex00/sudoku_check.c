@@ -6,13 +6,13 @@
 /*   By: seli <seli@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/30 16:24:46 by lisimpki          #+#    #+#             */
-/*   Updated: 2018/09/30 20:19:33 by seli             ###   ########.fr       */
+/*   Updated: 2018/09/30 20:54:59 by seli             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_imperative_sudoku.h"
 
-int		is_row_valid(int board[9][9], int row, int col, int guess)
+int		is_row_valid(int board[9][9], int row, int guess)
 {
 	int i;
 
@@ -23,7 +23,7 @@ int		is_row_valid(int board[9][9], int row, int col, int guess)
 	return (TRUE);
 }
 
-int		is_column_valid(int board[9][9], int row, int col, int guess)
+int		is_column_valid(int board[9][9], int col, int guess)
 {
 	int i;
 
@@ -47,8 +47,8 @@ int		is_box_valid(int board[9][9], int row, int col, int guess)
 
 int		is_guess_valid(int b[9][9], int row, int col, int guess)
 {
-	if (is_row_valid(b, row, col, guess)
-		&& is_column_valid(b, row, col, guess)
+	if (is_row_valid(b, row, guess)
+		&& is_column_valid(b, col, guess)
 		&& is_box_valid(b, row, col, guess))
 		return (TRUE);
 	return (FALSE);
