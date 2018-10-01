@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "ex00/ft_imperative_sudoku.h"
+//#include "ex00/ft_imperative_sudoku.h"
 #define TRUE 1
 #define FALSE 0
 
@@ -17,7 +17,7 @@ int main(int ac, char **av)
   // initialziation
   create_board(ac, av, board);
 
-  ft_imperative_sudoku(board, matrix);
+  //ft_imperative_sudoku(board, matrix);
 
   show_table(board);
   printf("\n");

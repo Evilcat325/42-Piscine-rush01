@@ -2,7 +2,7 @@
 #define FALSE 0
 
 int g_solutions;
-int is_valid_and_viable(int board[9][9], int y, int x, int guess); //, int list[10]);
+int valid_and_viable(int board[9][9], int y, int x, int guess); //, int list[10]);
 void    show_table(int board[9][9]);
 
 int is_solved(int board[9][9], int *y, int *x)
@@ -48,6 +48,8 @@ int backtrack_please(int board[9][9], int solved_board[9][9]) //, int matrix[9][
   int y;
   int guess;
 
+    printf("\n Function name = backtrack_please\n");
+
   if (is_solved(board, &y, &x))
   {
     copy_table(board, solved_board);
@@ -59,14 +61,18 @@ int backtrack_please(int board[9][9], int solved_board[9][9]) //, int matrix[9][
   guess = 1;
   while(guess <= 9)
   {
-    if (is_valid_and_viable(board, y, x, guess)) //, matrix[y][x])
+
+    if (valid_and_viable(board, y, x, guess)) //, matrix[y][x])
     {
+          printf("\n guess = %d\n", guess);
       board[y][x] = guess;
+
       if (backtrack_please(board, solved_board)) //, matrix))
         return (TRUE);
       board[y][x] = 0;
     }
     guess++;
   }
+
   return (FALSE);
 }
